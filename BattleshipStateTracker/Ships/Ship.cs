@@ -5,7 +5,7 @@ namespace BattleshipStateTracker.Ships
         public string Name { get; set; }
         public int Width { get; set; }
         public int Hits { get; set; }
-        public CoordinateStatus CoordinateStatus { get; set; }
+        public SlotStatus SlotStatus { get; set; }
         public bool Sunk => Hits >= Width;
     }
 }

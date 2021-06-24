@@ -6,7 +6,7 @@ namespace BattleshipStateTracker.Ships
         {
             Name = "Carrier";
             Width = 5;
-            CoordinateStatus = CoordinateStatus.Carrier;
+            SlotStatus = SlotStatus.Carrier;
         }
     }
 }
