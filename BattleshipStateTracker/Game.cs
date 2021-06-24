@@ -10,7 +10,7 @@ namespace BattleshipStateTracker
 
         public void Play()
         {
-            Player1.PlaceShips(new Destroyer());
+            Player1.DeployShips(Player1.Ships);
             Player1.DisplayBoards();
         }
 

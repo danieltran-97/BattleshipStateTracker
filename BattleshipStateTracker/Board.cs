@@ -5,17 +5,16 @@ namespace BattleshipStateTracker
 {
     public class Board
     {
-        public char[,] BoardMatrix = new char[10,10];
         public static List<Slot> Slots { get; set; }
         public  Board()
         {
             Slots = new List<Slot>();
             
-            for (var i = 0; i < BoardMatrix.GetLength(0); i++)
+            for (var i = 0; i < 10; i++)
             {
-                for (var j = 0; j < BoardMatrix.GetLength(1); j++)
+                for (var j = 0; j < 10; j++)
                 {
-                    BoardMatrix[i, j] = (char)SlotStatus.Empty;
+                    Slots.Add(new Slot(i,j));
                 }
             }
         }
@@ -34,12 +33,12 @@ namespace BattleshipStateTracker
             
             Console.WriteLine("\n   ___________________");
             
-            for (var i = 0; i < BoardMatrix.GetLength(0); i++)
+            for (var i = 0; i < 10; i++)
             {
                 Console.Write("{0} |", rowLetter[i]);
-                for (var j = 0; j < BoardMatrix.GetLength(1); j++)
+                for (var j = 0; j < 10; j++)
                 {
-                    Console.Write("{0} ", BoardMatrix[i,j]);
+                    Console.Write("{0} ", Slots.At(i, j).Status);
                 }
                 Console.WriteLine();
             }

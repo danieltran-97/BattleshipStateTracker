@@ -38,53 +38,56 @@ namespace BattleshipStateTracker
             
         }
 
-        public void PlaceShips(Ship ship)
+        public void DeployShips(List<Ship> ships)
         {
             var random = new Random();
-            
-            bool open = true;
-
-            while (open)
+            foreach(var ship in ships)
             {
-                var orientation = random.Next(2); // 0 = horizontal
-                var rowStart = random.Next(11);
-                var columnStart = random.Next(11);
-                int rowEnd = rowStart, columnEnd = columnStart;
+                bool open = true;
 
-                if (orientation == 0)
+                while (open)
                 {
-                    for (var i = 1; i < ship.Width; i++)
+                    var orientation = random.Next(2); // 0 = horizontal
+                    var rowStart = random.Next(11);
+                    var columnStart = random.Next(11);
+                    int rowEnd = rowStart, columnEnd = columnStart;
+
+                    if (orientation == 0)
                     {
-                        rowEnd++;
+                        for (var i = 1; i < ship.Width; i++)
+                        {
+                            rowEnd++;
+                        }
                     }
-                }
-                else
-                {
-                    for (var i = 1; i < ship.Width; i++)
+                    else
                     {
-                        columnEnd++;
+                        for (var i = 1; i < ship.Width; i++)
+                        {
+                            columnEnd++;
+                        }
                     }
-                }
 
-                if (rowEnd > 10 || columnEnd > 10)
-                {
-                    open = true;
-                    continue;
-                }
+                    if (rowEnd > 10 || columnEnd > 10)
+                    {
+                        open = true;
+                        continue;
+                    }
 
-                var affectedSlots = Board.Slots.Range(rowStart, columnStart, rowEnd, columnEnd);
-                if (affectedSlots.Any(x => x.Occupied))
-                {
-                    open = true;
-                    continue;
+                    var affectedSlots = Board.Slots.Range(rowStart, columnStart, rowEnd, columnEnd);
+                    if (affectedSlots.Any(x => x.Occupied))
+                    {
+                        open = true;
+                        continue;
+                    }
+
+                    foreach (var slot in affectedSlots)
+                    {
+                        slot.SlotStatus = ship.SlotStatus;
+                    }
+
+                    open = false;
                 }
-                foreach (var slot in affectedSlots)
-                {
-                    slot.SlotStatus = ship.SlotStatus;
-                }
-                open = false;
             }
-
         }
     }
 }
