@@ -6,7 +6,7 @@ namespace BattleshipStateTracker.Ships
         {
             Name = "Destroyer";
             Width = 2;
-            SlotStatus = SlotStatus.Destroyer;
+            StatusType = StatusType.Destroyer;
         }
     }
 }

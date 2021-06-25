@@ -2,9 +2,9 @@ using System.ComponentModel;
 
 namespace BattleshipStateTracker
 {
-    public enum SlotStatus
+    public enum StatusType
     {
-        Empty = 'o',
+        Empty = '□',
         Battleship = 'B',
         Carrier = 'A',
         Cruiser = 'C',

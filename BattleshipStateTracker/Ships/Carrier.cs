@@ -6,7 +6,7 @@ namespace BattleshipStateTracker.Ships
         {
             Name = "Carrier";
             Width = 5;
-            SlotStatus = SlotStatus.Carrier;
+            StatusType = StatusType.Carrier;
         }
     }
 }

@@ -1,12 +1,12 @@
 namespace BattleshipStateTracker
 {
-    public class Slot
+    public class Square
     {
-        public SlotStatus SlotStatus { get; set; }
+        public StatusType StatusType { get; set; }
         public Coordinate Coordinate { get; }
         
         public bool Occupied =>
-            SlotStatus is SlotStatus.Battleship or SlotStatus.Carrier or SlotStatus.Cruiser or SlotStatus.Destroyer or SlotStatus.Submarine;
+            StatusType is StatusType.Battleship or StatusType.Carrier or StatusType.Cruiser or StatusType.Destroyer or StatusType.Submarine;
 
         public bool RandomSlotAvailable =>
             (Coordinate.Row % 2 == 0 && Coordinate.Column % 2 == 0)
@@ -16,14 +16,14 @@ namespace BattleshipStateTracker
         {
             get
             {
-                return (char) SlotStatus;
+                return (char) StatusType;
             }
         }
 
-        public Slot(int row, int column)
+        public Square(int row, int column)
         {
             Coordinate = new Coordinate(row, column);
-            SlotStatus = SlotStatus.Empty;
+            StatusType = StatusType.Empty;
         }
     }
 }

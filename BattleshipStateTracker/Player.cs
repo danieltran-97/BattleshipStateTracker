@@ -1,16 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml.Schema;
 using BattleshipStateTracker.Ships;
 
 namespace BattleshipStateTracker
 {
     public class Player
     {
-        public string Name { get; set; }
-        public Board ShipsBoard = new Board();
-        public Board FiringBoard = new Board();
+        private string Name { get; set; }
+        private Board _board = new Board();
         public List<Ship> Ships;
 
         public Player(string name)
@@ -31,10 +29,10 @@ namespace BattleshipStateTracker
             Console.WriteLine($"[{Name}]");
             
             Console.WriteLine("Firing board:");
-            FiringBoard.PrintBoard();
+            _board.PrintBoard(Board.FiringBoardSlots);
             
             Console.WriteLine("Ships board:");
-            ShipsBoard.PrintBoard();
+            _board.PrintBoard(Board.ShipsBoardSlots);
             
         }
 
@@ -73,7 +71,7 @@ namespace BattleshipStateTracker
                         continue;
                     }
 
-                    var affectedSlots = Board.Slots.Range(rowStart, columnStart, rowEnd, columnEnd);
+                    var affectedSlots = Board.ShipsBoardSlots.Range(rowStart, columnStart, rowEnd, columnEnd);
                     if (affectedSlots.Any(x => x.Occupied))
                     {
                         open = true;
@@ -82,7 +80,7 @@ namespace BattleshipStateTracker
 
                     foreach (var slot in affectedSlots)
                     {
-                        slot.SlotStatus = ship.SlotStatus;
+                        slot.StatusType = ship.StatusType;
                     }
 
                     open = false;
